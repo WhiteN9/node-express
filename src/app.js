@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/users", (req, res) => {
+  console.log("Users Page")
   res.send("Users Page");
 });
 
@@ -24,6 +25,8 @@ app.get("/users", (req, res) => {
 // };
 // app.use(logging);
 
-app.use(sayHello);
+// app.use(sayHello);
+
+app.get("/hello", sayHello);
 
 module.exports = app;
