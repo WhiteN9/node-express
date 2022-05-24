@@ -41,13 +41,6 @@ app.get("/songs", (req, res) => {
   const title = req.query.title;
   res.send(title);
 });
-  // const logging = (req, res, next) => {
-  //   console.log("A request is being made !");
-  //   next();
-  // };
-  // app.use(logging);
-
-  // app.use(sayHello);
 
 app.get("/hello", sayHello);
 app.get("/hi", sayHi);
@@ -56,5 +49,24 @@ app.get("/say/goodbye", (req, res) => {
 });
 app.get("/say/:greeting", saySomething);
 
+app.get("/states/:abbreviation", (req, res, next) => {
+  const abbreviation = req.params.abbreviation;
+  if (abbreviation.length > 2) {
+    next("State abbreviation is invalid.");
+  } else {
+    res.send(`${abbreviation} is a nice state, I'd like to visit.`);
+  }
+});
+
+// Not-found handler
+app.use((req, res, next) => {
+  res.send(`The route ${req.path} does not exist!`);
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.send(err);
+});
 
 module.exports = app;
