@@ -26,7 +26,7 @@ const saySomething = (req, res) => {
   res.send(content);
 };
 
-// Route functions
+// Routes
 app.get("/", (req, res) => {
   console.log("Home Page");
   res.send("Home Page");
